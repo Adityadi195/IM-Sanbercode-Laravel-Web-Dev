@@ -1,23 +1,11 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\PageController;
-use Illuminate\Http\Request;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\RegisterController;
 
-Route::get('/', function () {
-    return view('home');
-});
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
-Route::get('/signup', function () {
-    return view('signup');
-});
+Route::get('/register', [RegisterController::class, 'index'])->name('register');
 
-Route::post('/welcome', function (Request $request) {
-    return view('welcome', [
-        'first' => $request->first_name,
-        'last' => $request->last_name
-    ]);
-});
-
-Route::get('/', [PageController::class, 'home']);
-Route::get('/signup', [PageController::class, 'signup']);
+Route::post('/welcome', [RegisterController::class, 'store'])->name('welcome');
